@@ -1,4 +1,5 @@
 package com.example.demo.service;
+
 import com.example.demo.model.University;
 import com.example.demo.repository.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,4 +15,9 @@ public class UniversityService {
     public List<University> getAllUniversities() {
         return universityRepository.findAll();
     }
+
+    public University addUniversity(University university) {
+        return universityRepository.save(university);
+    }
+
 }
