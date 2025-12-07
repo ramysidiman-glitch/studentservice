@@ -23,7 +23,7 @@ public class StudentController {
     @Autowired
     private UniversityService universityService;
 
-    // Route pour récupérer toutes les universités
+    
     @GetMapping("/universities")
     public List<University> getAllUniversities() {
         return universityService.getAllUniversities();
@@ -38,11 +38,7 @@ public class StudentController {
     @PostMapping("/add")
     public ResponseEntity<Student> addStudent(@RequestBody Student student) {
         Optional<Student> result = studentService.addStudent(student);
-        return result
-                .map(s -> new ResponseEntity<>(s, HttpStatus.CREATED))
-                .orElseGet(() -> ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .build());
+        return result.map(s -> new ResponseEntity<>(s, HttpStatus.CREATED)).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
     }
 
     @GetMapping("/getAll")
