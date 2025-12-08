@@ -18,6 +18,21 @@ public class StudentService {
 
     @Autowired
     private UniversityRepository universityRepository;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+public void associateCourse(Long studentId, Long courseId) {
+    Map<String, Object> event = new HashMap<>();
+    event.put("student_id", studentId);
+    event.put("course_id", courseId);
+
+    rabbitTemplate.convertAndSend(
+            "student-events",
+            "student.course.associate",
+            event
+    );
+}
+
 
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
